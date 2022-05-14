@@ -1,60 +1,27 @@
-cmake_minimum_required(VERSION 3.5)
-project(server)
-project(client)
-project(stress_test)
-set(source 
-    src/Epoll.cpp
-    src/InetAddress.cpp
-    src/Socket.cpp
-    src/util.cpp
-    src/Channel.cpp
-    src/Server.cpp
-    src/EventLoop.cpp
-    src/Acceptor.cpp
-    src/Connection.cpp
-    src/Buffer.cpp
-    src/ThreadPool.cpp
-    server.cpp
-)
-set(cli_source
-    src/InetAddress.cpp
-    src/Socket.cpp
-    src/Buffer.cpp
-    src/util.cpp
-    client.cpp
-    )
+cmake_minimum_required(VERSION 3.10)
+# generate  a JSON compile database one has to select a
+# generator that support it.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# If present and true, this will cause all libraries to 
+# be built shared unless the library was explicitly added as a static library.
+set(BUILD_SHARED_LIBS ON)
 
-set(test_source
-    src/Buffer.cpp 
-    src/Socket.cpp
-    src/InetAddress.cpp 
-    src/ThreadPool.cpp 
-    src/util.cpp
-    test.cpp
-    )
+set(CMAKE_CXX_STANDARD 11)
+
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-add_executable(server ${source})
-add_executable(client ${cli_source})
-add_executable(stress_test ${test_source})
-find_package(Threads)
-target_include_directories(
-    server 
-        PRIVATE    
-            ${PROJECT_SOURCE_DIR}/include
-)
-# link threads 
-target_link_libraries (server ${CMAKE_THREAD_LIBS_INIT}) 
-target_include_directories(
-    client 
-        PRIVATE    
-            ${PROJECT_SOURCE_DIR}/include
-)
+project(Lime
+        VERSION 0.1)
 
-target_include_directories(
-    stress_test 
-        PRIVATE    
-            ${PROJECT_SOURCE_DIR}/include
-)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-target_link_libraries (stress_test ${CMAKE_THREAD_LIBS_INIT}) 
+#include
+set(LIME_SRC_INCLUDE_DIR ${PROJECT_BINARY_DIR}/src/include)
+# set(LIME_EXAMPLE_INCLUDE_DIR ${PROJECT_BINARY_DIR}/example/include)
+include_directories(${LIME_SRC_INCLUDE_DIR} ${LIME_EXAMPLE_INCLUDE_DIR})
+
+add_subdirectory(src)
+
