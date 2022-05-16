@@ -2,7 +2,7 @@
  * @Author: Limer
  * @Date: 2022-03-27 16:27:28
  * @LastEditors: Limer
- * @LastEditTime: 2022-04-25 22:06:50
+ * @LastEditTime: 2022-05-14 22:36:20
  * @Description:
  */
 #include <arpa/inet.h>
@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
                 printf("server disconnected!\n");
                 exit(EXIT_SUCCESS);
             } else if (read_bytes == -1 && errno == EAGAIN) {
-                printf("count: %d, message from server: %s\n", readbuf->size(),
+                printf("count: %zd, message from server: %s\n", readbuf->size(),
                        readbuf->c_str());
                 break;
             }
