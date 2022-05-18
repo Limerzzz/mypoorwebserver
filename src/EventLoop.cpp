@@ -2,7 +2,7 @@
  * @Author: Limer
  * @Date: 2022-04-03 15:35:16
  * @LastEditors: Limer
- * @LastEditTime: 2022-04-24 20:16:45
+ * @LastEditTime: 2022-05-18 12:57:08
  * @Description:
  */
 #include "EventLoop.h"
@@ -11,15 +11,9 @@
 #include "Epoll.h"
 #include "ThreadPool.h"
 
-Eventloop::Eventloop() : ep(nullptr), threadpoll(nullptr), quit(false) {
-    ep = new Epoll();
-    threadpoll = new ThreadPool();
-}
+Eventloop::Eventloop() : ep(nullptr), quit(false) { ep = new Epoll(); }
 
-Eventloop::~Eventloop() {
-    delete ep;
-    delete threadpoll;
-}
+Eventloop::~Eventloop() { delete ep; }
 
 void Eventloop::loop() {
     while (!quit) {
@@ -32,7 +26,3 @@ void Eventloop::loop() {
 }
 
 void Eventloop::updateChannel(Channel* ch) { ep->updateChannel(ch); }
-
-void Eventloop::addThread(std::function<void()> callback) {
-    threadpoll->add(callback);
-}

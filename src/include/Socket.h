@@ -2,7 +2,7 @@
  * @Author: Limer
  * @Date: 2022-03-29 13:35:57
  * @LastEditors: Limer
- * @LastEditTime: 2022-04-15 16:57:00
+ * @LastEditTime: 2022-05-17 13:13:57
  * @Description:
  */
 #ifndef __SOCKET_H__
@@ -20,6 +20,7 @@ class Socket {
     int accept(InetAddress* clnt_addr);
     void connect(InetAddress* serv_addr);
     int get_fd();
+    bool isNonblocking();
 };
 
 #endif

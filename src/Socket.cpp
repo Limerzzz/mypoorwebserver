@@ -2,7 +2,7 @@
  * @Author: Limer
  * @Date: 2022-04-04 15:08:19
  * @LastEditors: Limer
- * @LastEditTime: 2022-04-15 17:00:04
+ * @LastEditTime: 2022-05-17 13:20:43
  * @Description:
  */
 #include "Socket.h"
@@ -43,3 +43,8 @@ void Socket::connect(InetAddress* serv_addr) {
 }
 
 int Socket::get_fd() { return sockfd; }
+
+bool Socket::isNonblocking() {
+    int oldOpt = fcntl(sockfd, F_GETFL);
+    return (oldOpt & O_NONBLOCK) > 0;
+}

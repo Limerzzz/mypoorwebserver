@@ -2,7 +2,7 @@
  * @Author: Limer
  * @Date: 2022-04-03 15:11:52
  * @LastEditors: Limer
- * @LastEditTime: 2022-04-24 20:16:18
+ * @LastEditTime: 2022-05-18 12:56:19
  * @Description:
  */
 #ifndef __EVENTLOOP_H__
@@ -17,7 +17,6 @@ class Eventloop {
    private:
     Epoll* ep;
     bool quit;
-    ThreadPool* threadpoll;
 
    public:
     Eventloop();
@@ -25,7 +24,5 @@ class Eventloop {
 
     void loop();
     void updateChannel(Channel*);
-
-    void addThread(std::function<void()>);
 };
 #endif

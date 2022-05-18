@@ -2,7 +2,7 @@
  * @Author: Limer
  * @Date: 2022-04-06 21:35:04
  * @LastEditors: Limer
- * @LastEditTime: 2022-04-10 17:02:13
+ * @LastEditTime: 2022-05-17 19:43:09
  * @Description:
  */
 #include "Acceptor.h"
@@ -24,7 +24,7 @@ Acceptor::Acceptor(Eventloop* _loop) : loop(_loop) {
     setnonblocking(sock->get_fd());
     acptChl = new Channel(_loop, sock->get_fd());
     std::function<void()> cb = std::bind(&Acceptor::acptConn, this);
-    acptChl->setCallback(cb);
+    acptChl->setReadCallback(cb);
     acptChl->enableReading();
 }
 
